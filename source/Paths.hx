@@ -54,7 +54,7 @@ class Paths
 	static var currentLevel:String;
 	static public function getModFolders()
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		ignoreModFolders.set('characters', true);
 		ignoreModFolders.set('custom_events', true);
 		ignoreModFolders.set('custom_notetypes', true);
@@ -138,7 +138,7 @@ class Paths
 
 	static public function video(key:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsVideo(key);
 		if(FileSystem.exists(file)) {
 			return file;
@@ -149,7 +149,7 @@ class Paths
 
 	static public function sound(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsSounds(key);
 		if(FileSystem.exists(file)) {
 			if(!customSoundsLoaded.exists(file)) {
@@ -168,7 +168,7 @@ class Paths
 
 	inline static public function music(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:String = modsMusic(key);
 		if(FileSystem.exists(file)) {
 			if(!customSoundsLoaded.exists(file)) {
@@ -182,7 +182,7 @@ class Paths
 
 	inline static public function voices(song:String):Any
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:Sound = returnSongFile(modsSongs(song.toLowerCase().replace(' ', '-') + '/Voices'));
 		if(file != null) {
 			return file;
@@ -193,7 +193,7 @@ class Paths
 
 	inline static public function inst(song:String):Any
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var file:Sound = returnSongFile(modsSongs(song.toLowerCase().replace(' ', '-') + '/Inst'));
 		if(file != null) {
 			return file;
@@ -202,7 +202,7 @@ class Paths
 		return 'songs:assets/songs/${song.toLowerCase().replace(' ', '-')}/Inst.$SOUND_EXT';
 	}
 
-	#if MODS_ALLOWED
+	#if desktop
 	inline static private function returnSongFile(file:String):Sound
 	{
 		if(FileSystem.exists(file)) {
@@ -217,7 +217,7 @@ class Paths
 
 	inline static public function image(key:String, ?library:String):Dynamic
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var imageToReturn:FlxGraphic = addCustomGraphic(key);
 		if(imageToReturn != null) return imageToReturn;
 		#end
@@ -226,7 +226,7 @@ class Paths
 	
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
-		#if sys
+		#if desktop
 		if (!ignoreMods && FileSystem.exists(mods(key)))
 			return File.getContent(mods(key));
 
@@ -257,7 +257,7 @@ class Paths
 
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		if(FileSystem.exists(mods(currentModDirectory + '/' + key)) || FileSystem.exists(mods(key))) {
 			return true;
 		}
@@ -271,7 +271,7 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var imageLoaded:FlxGraphic = addCustomGraphic(key);
 		var xmlExists:Bool = false;
 		if(FileSystem.exists(modsXml(key))) {
@@ -286,7 +286,7 @@ class Paths
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
-		#if MODS_ALLOWED
+		#if desktop
 		var imageLoaded:FlxGraphic = addCustomGraphic(key);
 		var txtExists:Bool = false;
 		if(FileSystem.exists(modsTxt(key))) {
@@ -303,7 +303,7 @@ class Paths
 		return path.toLowerCase().replace(' ', '-');
 	}
 	
-	#if MODS_ALLOWED
+	#if desktop
 	static public function addCustomGraphic(key:String):FlxGraphic {
 		if(FileSystem.exists(modsImages(key))) {
 			if(!customImagesLoaded.exists(key)) {
